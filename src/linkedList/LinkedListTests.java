@@ -16,6 +16,25 @@ public class LinkedListTests {
 		ll.push(5);
 		System.out.println(ll.toString());
 		System.out.println(ll.size());
+		
+		ll.add(6, 0);
+		ll.add(7, 1);
+		System.out.println(ll.toString());
+		System.out.println(ll.size());
+		
+		ll.add(8, ll.size());
+		System.out.println(ll.toString());
+		System.out.println(ll.size());
+		
+		ll.remove(0);
+		System.out.println(ll.toString());
+		ll.remove(ll.size()-1);
+		System.out.println(ll.toString());
+		
+		ll.remove(2);
+		System.out.println(ll.toString());
+		
+		
 
 	}
 

@@ -26,6 +26,27 @@ public class LinkedList {
 		}
 	}
 
+	// Adding object at a specified index
+	public void add(Object data, int index) throws IndexOutOfBoundsException {
+		if (index < 0 || this.length < index) {
+			throw new IndexOutOfBoundsException("Index must be between 0 and the length of the list");
+		} else {
+			// Push data if index = 0
+			if (index == 0) {
+				this.push(data);
+			}
+			// Find node at index and insert new Node with references
+			else {
+				Node newNode = new Node(data);
+				Node tmp = getNodeAt(index - 1);
+				Node tmpNext = tmp.getNext();
+				tmp.setNext(newNode);
+				newNode.setNext(tmpNext);
+				this.length++;
+			}
+		}
+	}
+
 	// Adding object at the front of the list
 	public void push(Object data) {
 		Node newNode = new Node(data);
@@ -44,13 +65,45 @@ public class LinkedList {
 		}
 	}
 
+	// Removes Node at index
+	public void remove(int index) throws IndexOutOfBoundsException {
+		if (index < 0 || index > this.length) {
+			throw new IndexOutOfBoundsException("Index must be between 0 and the length of the list");
+		} else {
+			// Removing head
+			if (index == 0) {
+				this.head = this.head.getNext();
+			}
+			// Removing last Node
+			else if (index == this.length - 1) {
+				Node tmp = getNodeAt(this.length - 2);
+				tmp.setNext(null);
+			}
+			// Remove Node in between
+			else {
+				// Node before index
+				Node tmpBefore = getNodeAt(index - 1);
+				// Node after index
+				Node tmpNext = tmpBefore.getNext().getNext();
+				// Making reference of tmpBefore to tmpAfter to delete reference
+				// of index
+				tmpBefore.setNext(tmpNext);
+			}
+			this.length--;
+		}
+	}
+
 	// Return object at index
-	public Object get(int index) {
-		Object dataAtPosition;
+	public Object get(int index) throws IndexOutOfBoundsException {
+		return getNodeAt(index).getData();
+	}
+
+	// Return node at index
+	private Node getNodeAt(int index) throws IndexOutOfBoundsException {
 		// Index must be 0 or higher and must not be higher than the length of
 		// the list
 		if (index < 0 || index >= this.length) {
-			dataAtPosition = new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Index must be between 0 and the length of the list");
 		} else {
 			Node tmp = this.head;
 			// Finding the Node by iterating the list until the index is found
@@ -58,9 +111,8 @@ public class LinkedList {
 				tmp = tmp.getNext();
 				index--;
 			}
-			dataAtPosition = tmp.getData();
+			return tmp;
 		}
-		return dataAtPosition;
 	}
 
 	// Returns the size of the list
