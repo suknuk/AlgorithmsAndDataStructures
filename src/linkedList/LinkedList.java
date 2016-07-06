@@ -135,6 +135,7 @@ public class LinkedList {
 		return counter;
 	}
 
+	// Giving items in [Obj],[Obj] format
 	@Override
 	public String toString() {
 		String output;
@@ -153,6 +154,26 @@ public class LinkedList {
 			}
 		}
 		return output;
+	}
+
+	// Reversing the list
+	public void reverseList() {
+		if (this.length > 1) {
+			Node prev = null;
+			Node tmpHead = this.head;
+			Node next;
+
+			// Reversing the list by changing references
+			while (tmpHead != null) {
+				next = tmpHead.getNext();
+				tmpHead.setNext(prev);
+				prev = tmpHead;
+				tmpHead = next;
+			}
+			// Updating head
+			this.head = prev;
+		}
+
 	}
 
 	private class Node {

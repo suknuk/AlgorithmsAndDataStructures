@@ -34,6 +34,9 @@ public class LinkedListTests {
 		ll.remove(2);
 		System.out.println(ll.toString());
 		
+		ll.reverseList();
+		System.out.println(ll.toString());
+		
 		
 
 	}
