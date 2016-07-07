@@ -26,6 +26,53 @@ public class LinkedList {
 		}
 	}
 
+	// Overriding the standard equals function
+	@Override
+	public boolean equals(Object obj) {
+		boolean isEqual = false;
+		if (this == obj) {
+			isEqual = true;
+		} else if (obj == null) {
+			isEqual = false;
+		} else if (obj instanceof LinkedList) {
+			LinkedList objList = (LinkedList) obj;
+			Node objHead = objList.head;
+			Node tmpHead = this.head;
+
+			// Checking head = null cases
+			if (objHead == null && tmpHead == null) {
+				isEqual = true;
+			} else if (objHead == null || tmpHead == null) {
+				isEqual = false;
+			}
+
+			// Iterating until we find the end
+			while (objHead != null || tmpHead != null) {
+				if (objHead == null) {
+					isEqual = false;
+					break;
+				} else if (tmpHead == null) {
+					isEqual = false;
+					break;
+				}
+
+				if (objHead.getData().equals(tmpHead.getData())) {
+					objHead = objHead.getNext();
+					tmpHead = tmpHead.getNext();
+
+					if (objHead == null && tmpHead == null) {
+						isEqual = true;
+						break;
+					}
+				} else {
+					isEqual = false;
+					break;
+				}
+			}
+		} // end of long if bracket
+		return isEqual;
+	}
+
 	// Adding object at a specified index
 	public void add(Object data, int index) throws IndexOutOfBoundsException {
 		if (index < 0 || this.length < index) {

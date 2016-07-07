@@ -37,6 +37,21 @@ public class LinkedListTests {
 		ll.reverseList();
 		System.out.println(ll.toString());
 		
+		LinkedList ll1 = new LinkedList();
+		LinkedList ll2 = new LinkedList();
+		
+		System.out.println(ll1.equals(ll2));
+		
+		ll1.add(1);
+		System.out.println(ll1.equals(ll2));
+		ll1.add(2);
+		ll1.add(3);
+		ll2.add(1);
+		ll2.add(2);
+		System.out.println(ll1.equals(ll2));
+		ll2.add(3);
+		
+		System.out.println(ll1.equals(ll2));
 		
 
 	}
