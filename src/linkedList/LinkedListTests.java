@@ -53,6 +53,9 @@ public class LinkedListTests {
 		
 		System.out.println(ll1.equals(ll2));
 		
+		System.out.println(ll1.hashCode());
+		System.out.println(ll2.hashCode());
+		
 
 	}
 

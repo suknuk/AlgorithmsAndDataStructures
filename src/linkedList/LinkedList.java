@@ -1,5 +1,7 @@
 package linkedList;
 
+import java.util.Objects;
+
 public class LinkedList {
 	private Node head;
 	private int length;
@@ -71,6 +73,18 @@ public class LinkedList {
 			}
 		} // end of long if bracket
 		return isEqual;
+	}
+	
+	// Using the same fields as in the equals() method
+	@Override
+	public int hashCode(){
+		int hash = 7;
+		Node tmp = this.head;
+		while (tmp != null){
+			hash = 31 * hash + Objects.hashCode(this.head.getData());
+			tmp = tmp.getNext();
+		}
+		return hash;
 	}
 
 	// Adding object at a specified index
