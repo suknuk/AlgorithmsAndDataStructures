@@ -8,21 +8,21 @@ import linkedList.LinkedList;
 
 public class LinkedListToStringTests {
 	LinkedList ll;
-	
+
 	@Test
 	public void emptyListString() {
 		ll = new LinkedList();
-		
+
 		assertEquals(null, ll.toString());
 	}
-	
+
 	@Test
 	public void singleItemString() {
 		ll = new LinkedList();
 		ll.push(1);
 		assertEquals("[1]", ll.toString());
 	}
-	
+
 	@Test
 	public void multipleItemsString() {
 		ll = new LinkedList();

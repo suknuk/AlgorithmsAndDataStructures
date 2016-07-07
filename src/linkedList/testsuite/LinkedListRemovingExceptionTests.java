@@ -23,7 +23,7 @@ public class LinkedListRemovingExceptionTests {
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(0);
 	}
-	
+
 	@Test
 	public void removingItemNegativeIndexThrowsIndexOutOfBoundsException() {
 		ll = new LinkedList();
@@ -32,7 +32,7 @@ public class LinkedListRemovingExceptionTests {
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(-1);
 	}
-	
+
 	@Test
 	public void removingItemIndexTooLargeThrowsIndexOutOfBoundsException1() {
 		ll = new LinkedList();
@@ -41,7 +41,7 @@ public class LinkedListRemovingExceptionTests {
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(1);
 	}
-	
+
 	@Test
 	public void removingItemIndexTooLargeThrowsIndexOutOfBoundsException2() {
 		ll = new LinkedList();

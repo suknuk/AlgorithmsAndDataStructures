@@ -32,6 +32,7 @@ public class LinkedList {
 	@Override
 	public boolean equals(Object obj) {
 		boolean isEqual = false;
+		// testing equality with the same object
 		if (this == obj) {
 			isEqual = true;
 		} else if (obj == null) {

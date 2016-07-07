@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
 	LinkedListRemovingExceptionTests.class,
 	LinkedListPushTests.class,
 	LinkedListToStringTests.class,
-	LinkedListReverseTests.class
+	LinkedListReverseTests.class,
+	LinkedListEqualsAndHashCodeTests.class
 })
 
 public class JUnitTestSuite {

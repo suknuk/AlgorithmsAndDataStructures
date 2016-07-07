@@ -7,7 +7,7 @@ import org.junit.Test;
 import linkedList.LinkedList;
 
 public class LinkedListSizeTests {
-	
+
 	LinkedList ll;
 
 	// Testing List length
