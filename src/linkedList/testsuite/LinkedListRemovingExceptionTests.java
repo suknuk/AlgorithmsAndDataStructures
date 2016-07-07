@@ -1,5 +1,7 @@
 package linkedList.testsuite;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,6 +24,8 @@ public class LinkedListRemovingExceptionTests {
 		// ll.get(0) does not exist
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(0);
+
+		assertEquals(0, ll.size());
 	}
 
 	@Test
@@ -31,6 +35,8 @@ public class LinkedListRemovingExceptionTests {
 
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(-1);
+
+		assertEquals(1, ll.size());
 	}
 
 	@Test
@@ -40,6 +46,8 @@ public class LinkedListRemovingExceptionTests {
 
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(1);
+
+		assertEquals(1, ll.size());
 	}
 
 	@Test
@@ -51,5 +59,7 @@ public class LinkedListRemovingExceptionTests {
 
 		thrown.expect(IndexOutOfBoundsException.class);
 		ll.remove(3);
+
+		assertEquals(3, ll.size());
 	}
 }
