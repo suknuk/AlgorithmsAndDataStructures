@@ -74,14 +74,15 @@ public class LinkedList {
 		} // end of long if bracket
 		return isEqual;
 	}
-	
+
 	// Using the same fields as in the equals() method
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		int hash = 7;
 		Node tmp = this.head;
-		while (tmp != null){
-			hash = 31 * hash + Objects.hashCode(this.head.getData());
+		// Calculating a hash code by using all data fields of a Linked List
+		while (tmp != null) {
+			hash = 31 * hash + (tmp.getData() == null ? 0 : Objects.hashCode(tmp.getData()));
 			tmp = tmp.getNext();
 		}
 		return hash;
@@ -128,8 +129,10 @@ public class LinkedList {
 
 	// Removes Node at index
 	public void remove(int index) throws IndexOutOfBoundsException {
-		if (index < 0 || index > this.length) {
+		if (index < 0 || index >= this.length) {
 			throw new IndexOutOfBoundsException("Index must be between 0 and the length of the list");
+		} else if (this.size() == 0) {
+			throw new IndexOutOfBoundsException("Cannot remove items from an empty list");
 		} else {
 			// Removing head
 			if (index == 0) {
@@ -181,20 +184,14 @@ public class LinkedList {
 		return this.length;
 	}
 
-	// Calculates the size of the list
-	public int calculateSize() {
-		int counter = 0;
-		// List has elements
-		if (this.head != null) {
-			Node tmp = this.head;
-			// iterate through every node
-			while (tmp != null) {
-				counter++;
-				tmp = tmp.getNext();
-			}
-		}
-		return counter;
-	}
+	// Calculates the size of the list - not really useful when
+	// we have an index
+	/*
+	 * public int calculateSize() { int counter = 0; // List has elements if
+	 * (this.head != null) { Node tmp = this.head; // iterate through every node
+	 * while (tmp != null) { counter++; tmp = tmp.getNext(); } } return counter;
+	 * }
+	 */
 
 	// Giving items in [Obj],[Obj] format
 	@Override
