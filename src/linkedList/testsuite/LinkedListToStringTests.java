@@ -7,25 +7,25 @@ import org.junit.Test;
 import linkedList.LinkedList;
 
 public class LinkedListToStringTests {
-	LinkedList ll;
+	LinkedList<Integer> ll;
 
 	@Test
-	public void emptyListString() {
-		ll = new LinkedList();
+	public void emptyObjectListString() {
+		ll = new LinkedList<Integer>();
 
 		assertEquals(null, ll.toString());
 	}
 
 	@Test
-	public void singleItemString() {
-		ll = new LinkedList();
+	public void singleIntegerItemString() {
+		ll = new LinkedList<Integer>();
 		ll.push(1);
 		assertEquals("[1]", ll.toString());
 	}
 
 	@Test
-	public void multipleItemsString() {
-		ll = new LinkedList();
+	public void multipleIntegerItemsString() {
+		ll = new LinkedList<Integer>();
 		ll.push(1);
 		ll.push(3);
 		ll.push(2);

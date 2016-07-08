@@ -10,14 +10,14 @@ import linkedList.LinkedList;
 
 public class LinkedListReverseTests {
 
-	LinkedList ll;
+	LinkedList<Integer> ll;
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void reverseEmptyList() {
-		ll = new LinkedList();
+	public void reverseEmptyObjectList() {
+		ll = new LinkedList<Integer>();
 		ll.reverseList();
 
 		assertEquals(0, ll.size());
@@ -27,30 +27,30 @@ public class LinkedListReverseTests {
 	}
 
 	@Test
-	public void reverseSingleItemList() {
-		ll = new LinkedList();
+	public void reverseSingleIntegerItemList() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.reverseList();
 
-		assertEquals(1, ll.get(0));
+		assertEquals(Integer.valueOf(1), ll.get(0));
 		assertEquals(1, ll.size());
 	}
 
 	@Test
-	public void reverseTwoItemsList() {
-		ll = new LinkedList();
+	public void reverseTwoIntegerItemsList() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.reverseList();
 
-		assertEquals(2, ll.get(0));
-		assertEquals(1, ll.get(1));
+		assertEquals(Integer.valueOf(2), ll.get(0));
+		assertEquals(Integer.valueOf(1), ll.get(1));
 		assertEquals(2, ll.size());
 	}
 
 	@Test
-	public void reverseManyItemsList() {
-		ll = new LinkedList();
+	public void reverseManyIntegerItemsList() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.add(3);
@@ -60,12 +60,12 @@ public class LinkedListReverseTests {
 
 		ll.reverseList();
 
-		assertEquals(6, ll.get(0));
-		assertEquals(5, ll.get(1));
-		assertEquals(4, ll.get(2));
-		assertEquals(3, ll.get(3));
-		assertEquals(2, ll.get(4));
-		assertEquals(1, ll.get(5));
+		assertEquals(Integer.valueOf(6), ll.get(0));
+		assertEquals(Integer.valueOf(5), ll.get(1));
+		assertEquals(Integer.valueOf(4), ll.get(2));
+		assertEquals(Integer.valueOf(3), ll.get(3));
+		assertEquals(Integer.valueOf(2), ll.get(4));
+		assertEquals(Integer.valueOf(1), ll.get(5));
 		assertEquals(6, ll.size());
 	}
 

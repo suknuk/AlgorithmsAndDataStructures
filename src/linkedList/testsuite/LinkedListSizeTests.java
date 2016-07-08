@@ -8,27 +8,27 @@ import linkedList.LinkedList;
 
 public class LinkedListSizeTests {
 
-	LinkedList ll;
+	LinkedList<Integer> ll;
 
 	// Testing List length
 	@Test
 	public void listSizeNoItem() {
-		ll = new LinkedList();
+		ll = new LinkedList<Integer>();
 
 		assertEquals(0, ll.size());
 	}
 
 	@Test
-	public void listSizeOneItem() {
-		ll = new LinkedList();
+	public void listSizeOneIntegerItem() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 
 		assertEquals(1, ll.size());
 	}
 
 	@Test
-	public void listSizeMultipleItems() {
-		ll = new LinkedList();
+	public void listSizeMultipleIntegerItems() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.add(3);
@@ -37,8 +37,8 @@ public class LinkedListSizeTests {
 	}
 
 	@Test
-	public void listSizeAddingAndDeletingItems1() {
-		ll = new LinkedList();
+	public void listSizeAddingAndDeletingIntegerItems1() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.add(3);
@@ -51,8 +51,8 @@ public class LinkedListSizeTests {
 	}
 
 	@Test
-	public void listSizeAddingAndDeletingItems2() {
-		ll = new LinkedList();
+	public void listSizeAddingAndDeletingIntegerItems2() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.add(3);
@@ -64,8 +64,8 @@ public class LinkedListSizeTests {
 	}
 
 	@Test
-	public void listSizeAddingAndDeletingItems3() {
-		ll = new LinkedList();
+	public void listSizeAddingAndDeletingIntegerItems3() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(2);
 		ll.remove(0);

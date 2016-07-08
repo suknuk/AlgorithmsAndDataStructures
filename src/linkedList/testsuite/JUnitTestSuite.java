@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
 	LinkedListPushTests.class,
 	LinkedListToStringTests.class,
 	LinkedListReverseTests.class,
-	LinkedListEqualsAndHashCodeTests.class
+	LinkedListEqualsAndHashCodeTests.class,
+	LinkedListMergeTests.class
 })
 
 public class JUnitTestSuite {

@@ -10,24 +10,24 @@ import linkedList.LinkedList;
 // The hashCode function has to always give the same result of 2 lists with the same objects in the same order
 public class LinkedListEqualsAndHashCodeTests {
 
-	LinkedList ll1, ll2;
+	LinkedList<Integer> ll1, ll2;
 
 	@Test
 	public void equalsSameObject() {
-		ll1 = new LinkedList();
+		ll1 = new LinkedList<Integer>();
 		assertEquals(true, ll1.equals(ll1));
 	}
 
 	@Test
 	public void equalsNullObject() {
-		ll1 = new LinkedList();
+		ll1 = new LinkedList<Integer>();
 		assertEquals(false, ll1.equals(null));
 	}
 
 	@Test
 	public void equalsTwoEmptyLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		assertEquals(true, ll1.equals(ll2));
 		assertEquals(true, ll2.equals(ll1));
@@ -35,9 +35,9 @@ public class LinkedListEqualsAndHashCodeTests {
 	}
 
 	@Test
-	public void equalsTwoEqualSingleItemLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+	public void equalsTwoEqualIntegerSingleItemLists() {
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		ll1.add(1);
 		ll2.add(1);
@@ -48,9 +48,9 @@ public class LinkedListEqualsAndHashCodeTests {
 	}
 
 	@Test
-	public void equalsTwoEqualMultipleItemLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+	public void equalsTwoEqualIntegerMultipleItemLists() {
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		ll1.add(1);
 		ll1.add(2);
@@ -67,9 +67,9 @@ public class LinkedListEqualsAndHashCodeTests {
 	}
 
 	@Test
-	public void equalsTwoNonEqualSingleItemLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+	public void equalsTwoNonEqualIntegerSingleItemLists() {
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		ll1.add(1);
 		ll2.add(2);
@@ -81,9 +81,9 @@ public class LinkedListEqualsAndHashCodeTests {
 	}
 
 	@Test
-	public void equalsTwoNonEqualDifferentSizeItemLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+	public void equalsTwoNonEqualIntegerDifferentSizeItemLists() {
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		ll1.add(1);
 		ll1.add(2);
@@ -96,9 +96,9 @@ public class LinkedListEqualsAndHashCodeTests {
 	}
 
 	@Test
-	public void equalsTwoNonEqualSameSizeSameElementsDifferentOrderLists() {
-		ll1 = new LinkedList();
-		ll2 = new LinkedList();
+	public void equalsTwoNonEqualIntegerSameSizeSameElementsDifferentOrderLists() {
+		ll1 = new LinkedList<Integer>();
+		ll2 = new LinkedList<Integer>();
 
 		ll1.add(1);
 		ll1.add(2);

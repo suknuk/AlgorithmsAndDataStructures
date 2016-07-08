@@ -8,27 +8,27 @@ import linkedList.LinkedList;
 
 public class LinkedListPushTests {
 
-	LinkedList ll;
+	LinkedList<Integer> ll;
 
 	@Test
-	public void pushSingleItem() {
-		ll = new LinkedList();
+	public void pushSingleIntegerItem() {
+		ll = new LinkedList<Integer>();
 		ll.push(1);
 
-		assertEquals(1, ll.get(0));
+		assertEquals(Integer.valueOf(1), ll.get(0));
 		assertEquals(1, ll.size());
 	}
 
 	@Test
-	public void pushMultipleItems() {
-		ll = new LinkedList();
+	public void pushMultipleIntegerItems() {
+		ll = new LinkedList<Integer>();
 		ll.push(1);
 		ll.push(2);
 		ll.push(3);
 
-		assertEquals(3, ll.get(0));
-		assertEquals(2, ll.get(1));
-		assertEquals(1, ll.get(2));
+		assertEquals(Integer.valueOf(3), ll.get(0));
+		assertEquals(Integer.valueOf(2), ll.get(1));
+		assertEquals(Integer.valueOf(1), ll.get(2));
 		assertEquals(3, ll.size());
 	}
 

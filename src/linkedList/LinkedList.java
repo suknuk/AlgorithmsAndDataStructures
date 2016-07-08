@@ -2,15 +2,33 @@ package linkedList;
 
 import java.util.Objects;
 
-public class LinkedList {
+public class LinkedList<E> {
 	private Node head;
 	private int length;
 
 	public LinkedList() {
 	}
 
+	public LinkedList(E obj) {
+		this.add(obj);
+	}
+
+	/*
+	 * public static LinkedList merge(LinkedList ll1, LinkedList ll2) {
+	 * 
+	 * LinkedList returnList = null;
+	 * 
+	 * if (ll1 == null) { returnList = ll2; } else if (ll2 == null) { returnList
+	 * = ll1; } else { Node newHead; Node n1 = ll1.head; Node n2 = ll2.head;
+	 * 
+	 * // Get starting head if (n1.data.hashCode() <= n2.data.hashCode()){
+	 * newHead = n1; } else { newHead = n2; } }
+	 * 
+	 * return returnList; }
+	 */
+
 	// Adding object at the end of the list
-	public void add(Object data) {
+	public void add(E data) {
 		Node newNode = new Node(data);
 		// empty List
 		if (this.head == null) {
@@ -38,8 +56,9 @@ public class LinkedList {
 		} else if (obj == null) {
 			isEqual = false;
 		} else if (obj instanceof LinkedList) {
-			LinkedList objList = (LinkedList) obj;
-			Node objHead = objList.head;
+
+			LinkedList<?> objList = (LinkedList<?>) obj;
+			Node objHead = (Node) objList.head;
 			Node tmpHead = this.head;
 
 			// Checking head = null cases
@@ -72,6 +91,7 @@ public class LinkedList {
 					break;
 				}
 			}
+
 		} // end of long if bracket
 		return isEqual;
 	}
@@ -90,7 +110,7 @@ public class LinkedList {
 	}
 
 	// Adding object at a specified index
-	public void add(Object data, int index) throws IndexOutOfBoundsException {
+	public void add(E data, int index) throws IndexOutOfBoundsException {
 		if (index < 0 || this.length < index) {
 			throw new IndexOutOfBoundsException("Index must be between 0 and the length of the list");
 		} else {
@@ -111,7 +131,7 @@ public class LinkedList {
 	}
 
 	// Adding object at the front of the list
-	public void push(Object data) {
+	public void push(E data) {
 		Node newNode = new Node(data);
 		// empty List
 		if (this.head == null) {
@@ -159,7 +179,7 @@ public class LinkedList {
 	}
 
 	// Return object at index
-	public Object get(int index) throws IndexOutOfBoundsException {
+	public E get(int index) throws IndexOutOfBoundsException {
 		return getNodeAt(index).getData();
 	}
 
@@ -232,12 +252,11 @@ public class LinkedList {
 			// Updating head
 			this.head = prev;
 		}
-
 	}
 
 	private class Node {
 		// data of this node carried, can be any Object
-		Object data;
+		E data;
 		// reference to next Node in chain, null if there is none
 		Node next;
 
@@ -248,17 +267,17 @@ public class LinkedList {
 		}
 
 		// Node constructor with value
-		public Node(Object dataValue) {
+		public Node(E dataValue) {
 			this(dataValue, null);
 		}
 
 		// Node constructor with value and next Node
-		public Node(Object dataValue, Node nextNode) {
+		public Node(E dataValue, Node nextNode) {
 			this.data = dataValue;
 			this.next = nextNode;
 		}
 
-		Object getData() {
+		E getData() {
 			return data;
 		}
 
@@ -267,7 +286,7 @@ public class LinkedList {
 		}
 
 		@SuppressWarnings("unused")
-		void setData(Object newData) {
+		void setData(E newData) {
 			this.data = newData;
 		}
 

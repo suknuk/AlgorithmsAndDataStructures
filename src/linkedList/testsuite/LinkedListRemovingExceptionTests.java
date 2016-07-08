@@ -10,14 +10,14 @@ import linkedList.LinkedList;
 
 public class LinkedListRemovingExceptionTests {
 
-	LinkedList ll;
+	LinkedList<Integer> ll;
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void removingItemEmptyListThrowsIndexOutOfBoundsException() {
-		ll = new LinkedList();
+	public void removingIntegerItemEmptyListThrowsIndexOutOfBoundsException() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.remove(0);
 
@@ -29,8 +29,8 @@ public class LinkedListRemovingExceptionTests {
 	}
 
 	@Test
-	public void removingItemNegativeIndexThrowsIndexOutOfBoundsException() {
-		ll = new LinkedList();
+	public void removingIntegerItemNegativeIndexThrowsIndexOutOfBoundsException() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 
 		thrown.expect(IndexOutOfBoundsException.class);
@@ -40,8 +40,8 @@ public class LinkedListRemovingExceptionTests {
 	}
 
 	@Test
-	public void removingItemIndexTooLargeThrowsIndexOutOfBoundsException1() {
-		ll = new LinkedList();
+	public void removingIntegerItemIndexTooLargeThrowsIndexOutOfBoundsException1() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 
 		thrown.expect(IndexOutOfBoundsException.class);
@@ -51,8 +51,8 @@ public class LinkedListRemovingExceptionTests {
 	}
 
 	@Test
-	public void removingItemIndexTooLargeThrowsIndexOutOfBoundsException2() {
-		ll = new LinkedList();
+	public void removingIntegerItemIndexTooLargeThrowsIndexOutOfBoundsException2() {
+		ll = new LinkedList<Integer>();
 		ll.add(1);
 		ll.add(1123);
 		ll.add(1431);
