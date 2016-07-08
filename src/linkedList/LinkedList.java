@@ -1,5 +1,6 @@
 package linkedList;
 
+import java.util.Hashtable;
 import java.util.Objects;
 
 public class LinkedList<E> {
@@ -12,20 +13,6 @@ public class LinkedList<E> {
 	public LinkedList(E obj) {
 		this.add(obj);
 	}
-
-	/*
-	 * public static LinkedList merge(LinkedList ll1, LinkedList ll2) {
-	 * 
-	 * LinkedList returnList = null;
-	 * 
-	 * if (ll1 == null) { returnList = ll2; } else if (ll2 == null) { returnList
-	 * = ll1; } else { Node newHead; Node n1 = ll1.head; Node n2 = ll2.head;
-	 * 
-	 * // Get starting head if (n1.data.hashCode() <= n2.data.hashCode()){
-	 * newHead = n1; } else { newHead = n2; } }
-	 * 
-	 * return returnList; }
-	 */
 
 	// Adding object at the end of the list
 	public void add(E data) {
@@ -46,6 +33,19 @@ public class LinkedList<E> {
 		}
 	}
 
+	// Removing duplicate items from a unsorted list
+	public void removeDuplicates(){
+		Hashtable<E, Boolean> table = new Hashtable<E, Boolean>();
+		for (int i = 0; i < this.length; ){
+			if(table.containsKey(this.get(i))){
+				this.remove(i);
+			} else {
+				table.put(this.get(i), true);
+				i++;
+			}
+		}
+	}
+	
 	// Overriding the standard equals function
 	@Override
 	public boolean equals(Object obj) {
@@ -58,6 +58,8 @@ public class LinkedList<E> {
 		} else if (obj instanceof LinkedList) {
 
 			LinkedList<?> objList = (LinkedList<?>) obj;
+			// Suppressed because of last if statement, this will always be a Node
+			@SuppressWarnings("unchecked")
 			Node objHead = (Node) objList.head;
 			Node tmpHead = this.head;
 

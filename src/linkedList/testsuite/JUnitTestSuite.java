@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
 	LinkedListToStringTests.class,
 	LinkedListReverseTests.class,
 	LinkedListEqualsAndHashCodeTests.class,
-	LinkedListMergeTests.class
+	LinkedListRemoveDuplicatesTests.class
 })
 
 public class JUnitTestSuite {
