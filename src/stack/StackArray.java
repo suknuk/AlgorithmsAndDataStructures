@@ -52,6 +52,9 @@ public class StackArray<E> implements Stack<E> {
 	// Returning the top item of the stack
 	@Override
 	public E peek() {
+		if (this.size == 0){
+			throw new java.util.EmptyStackException();
+		}
 		return this.stack[size - 1];
 	}
 
@@ -87,7 +90,7 @@ public class StackArray<E> implements Stack<E> {
 				break;
 			}
 		}
-		return 0;
+		return position;
 	}
 
 	@Override
