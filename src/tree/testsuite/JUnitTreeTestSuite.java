@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
 	TreePostOrderTests.class,
 	TreeInOrderTests.class,
 	TreeHeightTests.class,
-	TreeTopViewTests.class
+	TreeTopViewTests.class,
+	TreeLevelOderTests.class
 })
 
 public class JUnitTreeTestSuite {

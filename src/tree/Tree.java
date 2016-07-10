@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.ArrayList;
+
 public class Tree {
 
 	// root Node
@@ -8,6 +10,33 @@ public class Tree {
 	// Constructor
 	public Tree(Node<?> root) {
 		this.root = root;
+	}
+
+	// Level Order traversal
+	public String levelOrder() {
+		String output = "";
+		ArrayList<Node<?>> actualLevel = new ArrayList<Node<?>>();
+		actualLevel.add(this.root);
+		ArrayList<Node<?>> nextLevel;// = new ArrayList<Node>();
+
+		// While there are Nodes in the current depth
+		while (actualLevel.size() != 0) {
+			nextLevel = new ArrayList<Node<?>>();
+			// Iterate all Nodes of the current level which are in order
+			for (Node<?> n : actualLevel) {
+				output += n.data.toString();
+				// Left then right
+				if (n.getLeft() != null) {
+					nextLevel.add(n.getLeft());
+				}
+				if (n.getRight() != null) {
+					nextLevel.add(n.getRight());
+				}
+			}
+			actualLevel = nextLevel;
+		}
+
+		return output;
 	}
 
 	// Top view from the root
