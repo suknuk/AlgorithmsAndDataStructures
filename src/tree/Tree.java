@@ -12,6 +12,41 @@ public class Tree {
 		this.root = root;
 	}
 
+	// Inserting Node at the right position with the hashCode() method
+	@SuppressWarnings("unchecked")
+	public void insertNode(@SuppressWarnings("rawtypes") Node node){
+		@SuppressWarnings("rawtypes")
+		Node tmp = this.root;
+		boolean inserted = false;
+		while (!inserted){
+			// Look left
+			if (node.data.hashCode() < tmp.data.hashCode()){
+				// insert node at position if null
+				if (tmp.getLeft() == null){
+					tmp.setLeft(node);
+					inserted = true;
+					// Iterate further left
+				} else {
+					tmp = tmp.getLeft();
+				}
+			// Look right
+			} else if (node.data.hashCode() > tmp.data.hashCode()){
+				// insert node at position if null
+				if (tmp.getRight() == null){
+					tmp.setRight(node);
+					inserted = true;
+				// Iterate further right
+				} else {
+					tmp = tmp.getRight();
+				}
+			} else {
+				// If hashCode is the same, this method will not work
+				System.out.println("Node double detected");
+				return;
+			}
+		}
+	}
+	
 	// Level Order traversal
 	public String levelOrder() {
 		String output = "";

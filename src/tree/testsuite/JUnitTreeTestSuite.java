@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
 	TreeInOrderTests.class,
 	TreeHeightTests.class,
 	TreeTopViewTests.class,
-	TreeLevelOderTests.class
+	TreeLevelOderTests.class,
+	TreeInsertNodeTests.class
 })
 
 public class JUnitTreeTestSuite {
