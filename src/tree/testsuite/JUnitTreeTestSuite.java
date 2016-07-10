@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ 
 	TreePreOrderTests.class,
 	TreePostOrderTests.class,
-	TreeInOrderTests.class
+	TreeInOrderTests.class,
+	TreeHeightTests.class
 })
 
 public class JUnitTreeTestSuite {

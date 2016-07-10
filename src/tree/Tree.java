@@ -10,25 +10,42 @@ public class Tree {
 		this.root = root;
 	}
 	
+	// Height of the Tree
+	public int height(){
+		return this.height(this.root);
+	}
+	
+	private int height(Node<?> node){
+		int height = 1;
+		if (node.getLeft() != null){
+			height += height(node.getLeft());
+		}
+		if (node.getRight() != null){
+			height = Math.max(height, height(node.getRight()));
+		}
+		
+		return height;
+	}
+	
 	// Returns the items of the Tree in "in Order" form
 	public String inOrder() {
 		return inOrder(root);
 	}
 
-	private String inOrder(Node<?> root) {
+	private String inOrder(Node<?> node) {
 		String output = "";
 		String left = "";
 		String middle = "";
 		String right = "";
 		
-		if (root.getLeft() != null) {
-			left = inOrder(root.getLeft()) + " ";
+		if (node.getLeft() != null) {
+			left = inOrder(node.getLeft()) + " ";
 		}
 		
-		middle = root.data.toString();
+		middle = node.data.toString();
 		
-		if (root.getRight() != null) {
-			right = " " + inOrder(root.getRight());
+		if (node.getRight() != null) {
+			right = " " + inOrder(node.getRight());
 		}
 		
 		output = left + middle + right;
@@ -41,15 +58,15 @@ public class Tree {
 		return postOrder(root);
 	}
 
-	private String postOrder(Node<?> root) {
+	private String postOrder(Node<?> node) {
 		String output = "";
-		if (root.getLeft() != null) {
-			output += postOrder(root.getLeft()) + " ";
+		if (node.getLeft() != null) {
+			output += postOrder(node.getLeft()) + " ";
 		}
-		if (root.getRight() != null) {
-			output += postOrder(root.getRight()) + " ";
+		if (node.getRight() != null) {
+			output += postOrder(node.getRight()) + " ";
 		}
-		output += root.data.toString();
+		output += node.data.toString();
 		return output;
 	}
 	
@@ -58,13 +75,13 @@ public class Tree {
 		return preOrder(root);
 	}
 
-	private String preOrder(Node<?> root) {
-		String output = root.data.toString();
-		if (root.getLeft() != null) {
-			output += " " + preOrder(root.getLeft());
+	private String preOrder(Node<?> node) {
+		String output = node.data.toString();
+		if (node.getLeft() != null) {
+			output += " " + preOrder(node.getLeft());
 		}
-		if (root.getRight() != null) {
-			output += " " + preOrder(root.getRight());
+		if (node.getRight() != null) {
+			output += " " + preOrder(node.getRight());
 		}
 		return output;
 	}
