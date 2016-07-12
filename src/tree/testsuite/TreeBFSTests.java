@@ -33,7 +33,7 @@ public class TreeBFSTests {
 		n5.setRight(n4);
 		n2.setLeft(n6);
 	  
-		Tree t = new Tree(n3);
+		Tree<Integer> t = new Tree<Integer>(n3);
 
 		String bfs = "";
 		for (Node<?> n : t.BFS()){
@@ -68,7 +68,7 @@ public class TreeBFSTests {
 		n3.setLeft(n6);
 		n3.setRight(n7);
 	  
-		Tree t = new Tree(n1);
+		Tree<Integer> t = new Tree<Integer>(n1);
 		
 		String bfs = "";
 		for (Node<?> n : t.BFS()){

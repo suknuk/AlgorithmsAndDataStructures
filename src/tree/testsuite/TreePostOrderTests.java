@@ -24,7 +24,7 @@ public class TreePostOrderTests {
 		n5.setRight(n4);
 		n2.setLeft(n6);
 
-		Tree t = new Tree(n3);
+		Tree<Integer> t = new Tree<Integer>(n3);
 
 		String postOrder = "";
 		for (Node<?> n : t.postOrder()) {
@@ -49,7 +49,7 @@ public class TreePostOrderTests {
 		n2.setRight(n5);
 		n3.setLeft(n6);
 
-		Tree t = new Tree(n1);
+		Tree<Integer> t = new Tree<Integer>(n1);
 
 		String postOrder = "";
 		for (Node<?> n : t.postOrder()) {

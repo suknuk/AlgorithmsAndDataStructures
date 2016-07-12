@@ -2,7 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 
-public class Tree {
+public class Tree <E> {
 
 	// root Node
 	Node<?> root;
@@ -16,75 +16,39 @@ public class Tree {
 		this.root = root;
 	}
 
-	// Inserting Node at the right position with the hashCode() method
-	// Returns true if node was inserted, false if not
-	@SuppressWarnings("unchecked")
-	public boolean insertNode(@SuppressWarnings("rawtypes") Node node) {
-		@SuppressWarnings("rawtypes")
-		Node tmp = this.root;
-		boolean inserted = false;
-
-		// Tree is empty
-		if (this.root == null) {
-			this.root = node;
-			inserted = true;
+	public Node<E> search(E data){
+		boolean found = false;
+		Node<E> theNode = null;
+		while (!found){
+			
 		}
-
-		while (!inserted) {
-			// Look left
-			if (node.data.hashCode() < tmp.data.hashCode()) {
-				// insert node at position if null
-				if (tmp.getLeft() == null) {
-					tmp.setLeft(node);
-					inserted = true;
-					// Iterate further left
-				} else {
-					tmp = tmp.getLeft();
-				}
-				// Look right
-			} else if (node.data.hashCode() > tmp.data.hashCode()) {
-				// insert node at position if null
-				if (tmp.getRight() == null) {
-					tmp.setRight(node);
-					inserted = true;
-					// Iterate further right
-				} else {
-					tmp = tmp.getRight();
-				}
-			} else {
-				// If hashCode is the same, this method will not work
-				System.out.println("Node double detected");
-				break;
-			}
-		}
-
-		return inserted;
+		
+		return theNode;
 	}
-
+	
 	// Breath first search
 	public ArrayList<Node<?>> BFS() {
 		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		ArrayList<Node<?>> actualLevel = new ArrayList<Node<?>>();
-		actualLevel.add(this.root);
-		ArrayList<Node<?>> nextLevel;// = new ArrayList<Node>();
+		actualLevel.add((Node<?>) this.root);
+		ArrayList<Node<?>> nextLevel;
 
 		// While there are Nodes in the current depth
 		while (actualLevel.size() != 0) {
 			nextLevel = new ArrayList<Node<?>>();
 			// Iterate all Nodes of the current level which are in order
 			for (Node<?> n : actualLevel) {
-				output.add(n);
+				output.add((Node<?>) n);
 				// Left then right
-				if (n.getLeft() != null) {
-					nextLevel.add(n.getLeft());
+				if (n.hasLeft()) {
+					nextLevel.add((Node<?>) n.getLeft());
 				}
-				if (n.getRight() != null) {
-					nextLevel.add(n.getRight());
+				if (n.hasRight()) {
+					nextLevel.add((Node<?>) n.getRight());
 				}
 			}
 			actualLevel = nextLevel;
 		}
-
 		return output;
 	}
 
@@ -121,10 +85,10 @@ public class Tree {
 
 	private int height(Node<?> node) {
 		int height = 1;
-		if (node.getLeft() != null) {
+		if (node.hasLeft()) {
 			height += height(node.getLeft());
 		}
-		if (node.getRight() != null) {
+		if (node.hasRight()) {
 			height = Math.max(height, height(node.getRight()));
 		}
 
@@ -143,13 +107,13 @@ public class Tree {
 		;
 		ArrayList<Node<?>> right = new ArrayList<Node<?>>();
 
-		if (node.getLeft() != null) {
+		if (node.hasLeft()) {
 			left.addAll(inOrder(node.getLeft()));
 		}
 
 		middle.add(node);
 
-		if (node.getRight() != null) {
+		if (node.hasRight()) {
 			right.addAll(inOrder(node.getRight()));
 		}
 
@@ -167,10 +131,10 @@ public class Tree {
 
 	private ArrayList<Node<?>> postOrder(Node<?> node) {
 		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
-		if (node.getLeft() != null) {
+		if (node.hasLeft()) {
 			output.addAll(postOrder(node.getLeft()));
 		}
-		if (node.getRight() != null) {
+		if (node.hasRight()) {
 			output.addAll(postOrder(node.getRight()));
 		}
 		output.add(node);
@@ -185,10 +149,10 @@ public class Tree {
 	private ArrayList<Node<?>> preOrder(Node<?> node) {
 		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		output.add(node);
-		if (node.getLeft() != null) {
+		if (node.hasLeft()) {
 			output.addAll(preOrder(node.getLeft()));
 		}
-		if (node.getRight() != null) {
+		if (node.hasRight()) {
 			output.addAll(preOrder(node.getRight()));
 		}
 		return output;

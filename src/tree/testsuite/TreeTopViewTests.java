@@ -41,7 +41,7 @@ public class TreeTopViewTests {
 	  Top View : 1 -> 5 -> 3 -> 2 -> 7
 	  */
 	  
-		Tree t = new Tree(n3);
+		Tree<Integer> t = new Tree<Integer>(n3);
 		
 		String topView = "";
 		for (Node<?> n : t.topView()){
@@ -62,7 +62,7 @@ public class TreeTopViewTests {
 		n1.setRight(n3);
 		n2.setLeft(n4);
 	  
-		Tree t = new Tree(n1);
+		Tree<Integer> t = new Tree<Integer>(n1);
 		
 		String topView = "";
 		for (Node<?> n : t.topView()){

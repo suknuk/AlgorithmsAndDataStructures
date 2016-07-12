@@ -24,7 +24,7 @@ public class TreePreOrderTests {
 		n5.setRight(n4);
 		n2.setLeft(n6);
 
-		Tree t = new Tree(n3);
+		Tree<Integer> t = new Tree<Integer>(n3);
 
 		String preOrder = "";
 		for (Node<?> n : t.preOrder()) {
@@ -49,7 +49,7 @@ public class TreePreOrderTests {
 		n4.setRight(n5);
 		n5.setRight(n6);
 
-		Tree t = new Tree(n1);
+		Tree<Integer> t = new Tree<Integer>(n1);
 
 		String preOrder = "";
 		for (Node<?> n : t.preOrder()) {
