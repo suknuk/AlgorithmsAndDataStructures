@@ -131,61 +131,65 @@ public class Tree {
 		return height;
 	}
 
-	// Returns the items of the Tree in "in Order" form
-	public String inOrder() {
+	// Returns the nodes of the Tree in "in Order" form
+	public ArrayList<Node<?>> inOrder() {
 		return inOrder(root);
 	}
 
-	private String inOrder(Node<?> node) {
-		String output = "";
-		String left = "";
-		String middle = "";
-		String right = "";
+	private ArrayList<Node<?>> inOrder(Node<?> node) {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+		ArrayList<Node<?>> left = new ArrayList<Node<?>>();
+		ArrayList<Node<?>> middle = new ArrayList<Node<?>>();
+		;
+		ArrayList<Node<?>> right = new ArrayList<Node<?>>();
 
 		if (node.getLeft() != null) {
-			left = inOrder(node.getLeft()) + " ";
+			left.addAll(inOrder(node.getLeft()));
 		}
 
-		middle = node.data.toString();
+		middle.add(node);
 
 		if (node.getRight() != null) {
-			right = " " + inOrder(node.getRight());
+			right.addAll(inOrder(node.getRight()));
 		}
 
-		output = left + middle + right;
+		output.addAll(left);
+		output.addAll(middle);
+		output.addAll(right);
 
 		return output;
 	}
 
-	// Returns the items of the Tree in post Order form
-	public String postOrder() {
+	// Returns the nodes of the Tree in post Order form
+	public ArrayList<Node<?>> postOrder() {
 		return postOrder(root);
 	}
 
-	private String postOrder(Node<?> node) {
-		String output = "";
+	private ArrayList<Node<?>> postOrder(Node<?> node) {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		if (node.getLeft() != null) {
-			output += postOrder(node.getLeft()) + " ";
+			output.addAll(postOrder(node.getLeft()));
 		}
 		if (node.getRight() != null) {
-			output += postOrder(node.getRight()) + " ";
+			output.addAll(postOrder(node.getRight()));
 		}
-		output += node.data.toString();
+		output.add(node);
 		return output;
 	}
 
-	// Returns the items of the Tree in pre Order form
-	public String preOrder() {
+	// Returns the nodes of the Tree in pre Order form
+	public ArrayList<Node<?>> preOrder() {
 		return preOrder(root);
 	}
 
-	private String preOrder(Node<?> node) {
-		String output = node.data.toString();
+	private ArrayList<Node<?>> preOrder(Node<?> node) {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+		output.add(node);
 		if (node.getLeft() != null) {
-			output += " " + preOrder(node.getLeft());
+			output.addAll(preOrder(node.getLeft()));
 		}
 		if (node.getRight() != null) {
-			output += " " + preOrder(node.getRight());
+			output.addAll(preOrder(node.getRight()));
 		}
 		return output;
 	}
