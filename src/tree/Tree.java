@@ -7,49 +7,63 @@ public class Tree {
 	// root Node
 	Node<?> root;
 
+	public Tree() {
+		this.root = null;
+	}
+
 	// Constructor
 	public Tree(Node<?> root) {
 		this.root = root;
 	}
 
 	// Inserting Node at the right position with the hashCode() method
+	// Returns true if node was inserted, false if not
 	@SuppressWarnings("unchecked")
-	public void insertNode(@SuppressWarnings("rawtypes") Node node){
+	public boolean insertNode(@SuppressWarnings("rawtypes") Node node) {
 		@SuppressWarnings("rawtypes")
 		Node tmp = this.root;
 		boolean inserted = false;
-		while (!inserted){
+
+		// Tree is empty
+		if (this.root == null) {
+			this.root = node;
+			inserted = true;
+		}
+
+		while (!inserted) {
 			// Look left
-			if (node.data.hashCode() < tmp.data.hashCode()){
+			if (node.data.hashCode() < tmp.data.hashCode()) {
 				// insert node at position if null
-				if (tmp.getLeft() == null){
+				if (tmp.getLeft() == null) {
 					tmp.setLeft(node);
 					inserted = true;
 					// Iterate further left
 				} else {
 					tmp = tmp.getLeft();
 				}
-			// Look right
-			} else if (node.data.hashCode() > tmp.data.hashCode()){
+				// Look right
+			} else if (node.data.hashCode() > tmp.data.hashCode()) {
 				// insert node at position if null
-				if (tmp.getRight() == null){
+				if (tmp.getRight() == null) {
 					tmp.setRight(node);
 					inserted = true;
-				// Iterate further right
+					// Iterate further right
 				} else {
 					tmp = tmp.getRight();
 				}
 			} else {
 				// If hashCode is the same, this method will not work
 				System.out.println("Node double detected");
-				return;
+				break;
 			}
 		}
+
+		return inserted;
 	}
-	
-	// Level Order traversal
-	public String levelOrder() {
-		String output = "";
+
+	// Breath first search
+	public ArrayList<Node<?>> BFS() {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		ArrayList<Node<?>> actualLevel = new ArrayList<Node<?>>();
 		actualLevel.add(this.root);
 		ArrayList<Node<?>> nextLevel;// = new ArrayList<Node>();
@@ -59,7 +73,7 @@ public class Tree {
 			nextLevel = new ArrayList<Node<?>>();
 			// Iterate all Nodes of the current level which are in order
 			for (Node<?> n : actualLevel) {
-				output += n.data.toString();
+				output.add(n);
 				// Left then right
 				if (n.getLeft() != null) {
 					nextLevel.add(n.getLeft());
@@ -75,27 +89,27 @@ public class Tree {
 	}
 
 	// Top view from the root
-	public String topView() {
-		String output = "";
-		output = this.leftView(this.root);
-		output += this.rightView(this.root.getRight());
+	public ArrayList<Node<?>> topView() {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+		output.addAll(this.leftView(this.root));
+		output.addAll(this.rightView(this.root.getRight()));
 		return output;
 	}
 
-	private String leftView(Node<?> node) {
-		String output = "";
+	private ArrayList<Node<?>> leftView(Node<?> node) {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		if (node != null) {
-			output = this.leftView(node.getLeft());
-			output += node.data.toString();
+			output.addAll(this.leftView(node.getLeft()));
+			output.add(node);
 		}
 		return output;
 	}
 
-	private String rightView(Node<?> node) {
-		String output = "";
+	private ArrayList<Node<?>> rightView(Node<?> node) {
+		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
 		if (node != null) {
-			output = node.data.toString();
-			output += this.rightView(node.getRight());
+			output.add(node);
+			output.addAll(this.rightView(node.getRight()));
 		}
 		return output;
 	}

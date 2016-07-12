@@ -42,8 +42,13 @@ public class TreeTopViewTests {
 	  */
 	  
 		Tree t = new Tree(n3);
+		
+		String topView = "";
+		for (Node<?> n : t.topView()){
+			topView += n.getData().toString();
+		}
 
-		assertEquals("15327",t.topView());
+		assertEquals("15327",topView);
 	}
 	
 	@Test
@@ -58,8 +63,13 @@ public class TreeTopViewTests {
 		n2.setLeft(n4);
 	  
 		Tree t = new Tree(n1);
+		
+		String topView = "";
+		for (Node<?> n : t.topView()){
+			topView += n.getData().toString();
+		}
 
-		assertEquals("4213",t.topView());
+		assertEquals("4213",topView);
 	}
 
 }

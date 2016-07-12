@@ -11,6 +11,14 @@ public class Node<E> {
 	}
 
 	// Getters and setters
+	public E getData(){
+		return this.data;
+	}
+	
+	public void setData(E data){
+		this.data = data;
+	}
+	
 	public Node<E> getLeft() {
 		return left;
 	}

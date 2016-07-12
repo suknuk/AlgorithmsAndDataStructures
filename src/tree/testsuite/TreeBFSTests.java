@@ -7,7 +7,7 @@ import org.junit.Test;
 import tree.Node;
 import tree.Tree;
 
-public class TreeLevelOderTests {
+public class TreeBFSTests {
 
 	@Test
 	public void levelOrderTest1() {
@@ -24,7 +24,7 @@ public class TreeLevelOderTests {
 		     5     2
 		    / \    /
 		   1   4  6
-			level order traversal is 3 -> 5 -> 2 -> 1 -> 4 -> 6.
+			BFS is 3 -> 5 -> 2 -> 1 -> 4 -> 6.
 		 */
 		
 		n3.setLeft(n5);
@@ -35,7 +35,11 @@ public class TreeLevelOderTests {
 	  
 		Tree t = new Tree(n3);
 
-		assertEquals("352146",t.levelOrder());
+		String bfs = "";
+		for (Node<?> n : t.BFS()){
+			bfs += n.getData().toString();
+		}
+		assertEquals("352146",bfs);
 	}
 
 	@Test
@@ -65,7 +69,11 @@ public class TreeLevelOderTests {
 		n3.setRight(n7);
 	  
 		Tree t = new Tree(n1);
-
-		assertEquals("1234567",t.levelOrder());
+		
+		String bfs = "";
+		for (Node<?> n : t.BFS()){
+			bfs += n.getData().toString();
+		}
+		assertEquals("1234567",bfs);
 	}
 }

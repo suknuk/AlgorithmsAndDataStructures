@@ -43,7 +43,12 @@ public class TreeInsertNodeTests {
 		
 		t.insertNode(n6);
 		
-		assertEquals("427136",t.levelOrder());
+		String bfs = "";
+		for (Node<?> n : t.BFS()){
+			bfs += n.getData().toString();
+		}
+		
+		assertEquals("427136",bfs);
 	}
 	
 	@Test
@@ -65,6 +70,11 @@ public class TreeInsertNodeTests {
 		
 		t.insertNode(n4);
 		
-		assertEquals("125346",t.levelOrder());
+		String bfs = "";
+		for (Node<?> n : t.BFS()){
+			bfs += n.getData().toString();
+		}
+		
+		assertEquals("125346",bfs);
 	}
 }
