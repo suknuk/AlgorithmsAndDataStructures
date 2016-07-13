@@ -109,5 +109,90 @@ public class BinaryTreeRemoveTests {
 
 		assertEquals("325147", bfs);
 	}
+	
+	@Test
+	public void removeNodeTwoChildresnTest1() {
+		BinaryTree<Integer> t = new BinaryTree<Integer>();
+		t.insert(3);
+		t.insert(2);
+		t.insert(1);
+		t.insert(5);
+		t.insert(4);
+		t.insert(6);
+
+		t.remove(5);
+		
+		String bfs = "";
+		
+		for (Node<?> n : t.BFS()) {
+			bfs += n.getData().toString();
+		}
+
+		assertEquals("32614", bfs);
+	}
+	
+	@Test
+	public void removeNodeTwoChildresnTest2() {
+		BinaryTree<Integer> t = new BinaryTree<Integer>();
+		t.insert(5);
+		t.insert(2);
+		t.insert(1);
+		t.insert(3);
+		t.insert(10);
+		t.insert(9);
+		t.insert(15);
+		t.insert(14);
+		t.insert(16);
+
+		t.remove(10);
+		
+		String bfs = "";
+		
+		for (Node<?> n : t.BFS()) {
+			bfs += n.getData().toString() + " ";
+		}
+
+		assertEquals("5 2 14 1 3 9 15 16 ", bfs);
+	}
+	
+	@Test
+	public void removeRootWithTwoChildrenTest1() {
+		BinaryTree<Integer> t = new BinaryTree<Integer>();
+		t.insert(2);
+		t.insert(1);
+		t.insert(3);
+
+		t.remove(2);
+		
+		String bfs = "";
+		
+		for (Node<?> n : t.BFS()) {
+			bfs += n.getData().toString();
+		}
+
+		assertEquals("31", bfs);
+	}
+	
+	@Test
+	public void removeRootWithTwoChildrenTest2() {
+		BinaryTree<Integer> t = new BinaryTree<Integer>();
+		t.insert(3);
+		t.insert(2);
+		t.insert(1);
+		t.insert(5);
+		t.insert(4);
+		t.insert(6);
+		
+
+		t.remove(3);
+		
+		String bfs = "";
+		
+		for (Node<?> n : t.BFS()) {
+			bfs += n.getData().toString();
+		}
+
+		assertEquals("42516", bfs);
+	}
 
 }

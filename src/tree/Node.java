@@ -9,6 +9,10 @@ public class Node<E> {
 	public Node(E data) {
 		this.data = data;
 	}
+	
+	public Node(){
+		this.data = null;
+	}
 
 	// Getters and setters - should be self-explaining
 	public E getData() {

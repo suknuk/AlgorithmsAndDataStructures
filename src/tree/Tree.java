@@ -16,19 +16,21 @@ public class Tree<E> {
 		this.root = root;
 	}
 
-	public int count(){
+	public int count() {
 		return this.BFS().size();
 	}
-	
+
 	// Searching for the a node with 'data'
 	public Node<E> search(E data) {
 		Node<E> foundNode = null;
 
 		// Searching all nodes with BFS
 		for (Node<E> cur : this.BFS()) {
-			if (cur.getData().equals(data)) {
-				foundNode = (Node<E>) cur;
-				break;
+			if (cur.getData() != null) {
+				if (cur.getData().equals(data)) {
+					foundNode = (Node<E>) cur;
+					break;
+				}
 			}
 		}
 		return foundNode;
@@ -46,7 +48,7 @@ public class Tree<E> {
 		} else {
 			Node<E> parent = this.parent(data);
 			if (parent != null) {
-				if (parent.hasLeft() && parent.getLeft().getData().equals(data)){
+				if (parent.hasLeft() && parent.getLeft().getData().equals(data)) {
 					parent.setLeft(null);
 				} else {
 					parent.setRight(null);
@@ -78,10 +80,10 @@ public class Tree<E> {
 	}
 
 	// Breath first search
-	public ArrayList<Node<E>> BFS(){
+	public ArrayList<Node<E>> BFS() {
 		return this.BFS(this.root);
 	}
-	
+
 	// BFS from node different than node
 	public ArrayList<Node<E>> BFS(Node<E> node) {
 		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
