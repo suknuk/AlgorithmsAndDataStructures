@@ -26,7 +26,7 @@ public class TreeHeightTests {
 		n5.setRight(n6);
 		n6.setRight(n7);
 
-		Tree t = new Tree(n3);
+		Tree<Integer> t = new Tree<Integer>(n3);
 
 		assertEquals(3, t.height());
 	}
@@ -48,7 +48,7 @@ public class TreeHeightTests {
 		n3.setLeft(n6);
 		n5.setLeft(n7);
 
-		Tree t = new Tree(n1);
+		Tree<Integer> t = new Tree<Integer>(n1);
 
 		assertEquals(3, t.height());
 	}

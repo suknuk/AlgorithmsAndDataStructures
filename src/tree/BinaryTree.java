@@ -33,7 +33,7 @@ public class BinaryTree<E> extends Tree<E> {
 
 		while (!inserted) {
 			// Look left
-			if (node.data.hashCode() < tmp.data.hashCode()) {
+			if (node.getData().hashCode() < tmp.getData().hashCode()) {
 				// insert node at position if null
 				if (!tmp.hasLeft()) {
 					tmp.setLeft(node);
@@ -43,7 +43,7 @@ public class BinaryTree<E> extends Tree<E> {
 					tmp = tmp.getLeft();
 				}
 				// Look right
-			} else if (node.data.hashCode() > tmp.data.hashCode()) {
+			} else if (node.getData().hashCode() > tmp.getData().hashCode()) {
 				// insert node at position if null
 				if (!tmp.hasRight()) {
 					tmp.setRight(node);

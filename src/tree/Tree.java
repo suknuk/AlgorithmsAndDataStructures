@@ -2,7 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 
-public class Tree <E> {
+public class Tree<E> {
 
 	// root Node
 	Node<?> root;
@@ -16,16 +16,22 @@ public class Tree <E> {
 		this.root = root;
 	}
 
-	public Node<E> search(E data){
-		boolean found = false;
-		Node<E> theNode = null;
-		while (!found){
-			
+	// Searching for the a node with 'data'
+	@SuppressWarnings("unchecked")
+	public Node<E> search(E data) {
+		Node<E> foundNode = null;
+
+		// Searching all nodes with BFS
+		for (Node<?> cur : this.BFS()){
+			if (cur.getData().equals(data)){
+				foundNode = (Node<E>) cur;
+				break;
+			}
 		}
-		
-		return theNode;
+
+		return foundNode;
 	}
-	
+
 	// Breath first search
 	public ArrayList<Node<?>> BFS() {
 		ArrayList<Node<?>> output = new ArrayList<Node<?>>();

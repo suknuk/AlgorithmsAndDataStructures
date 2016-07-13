@@ -1,7 +1,7 @@
 package tree;
 
 public class Node<E> {
-	E data;
+	private E data;
 	private Node<E> left;
 	private Node<E> right;
 
