@@ -5,69 +5,119 @@ import java.util.ArrayList;
 public class Tree<E> {
 
 	// root Node
-	Node<?> root;
+	Node<E> root;
 
 	public Tree() {
 		this.root = null;
 	}
 
 	// Constructor
-	public Tree(Node<?> root) {
+	public Tree(Node<E> root) {
 		this.root = root;
 	}
 
+	public int count(){
+		return this.BFS().size();
+	}
+	
 	// Searching for the a node with 'data'
-	@SuppressWarnings("unchecked")
 	public Node<E> search(E data) {
 		Node<E> foundNode = null;
 
 		// Searching all nodes with BFS
-		for (Node<?> cur : this.BFS()){
-			if (cur.getData().equals(data)){
+		for (Node<E> cur : this.BFS()) {
+			if (cur.getData().equals(data)) {
 				foundNode = (Node<E>) cur;
 				break;
 			}
 		}
-
 		return foundNode;
 	}
 
-	// Breath first search
-	public ArrayList<Node<?>> BFS() {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
-		ArrayList<Node<?>> actualLevel = new ArrayList<Node<?>>();
-		actualLevel.add((Node<?>) this.root);
-		ArrayList<Node<?>> nextLevel;
+	// Removing Node by setting reference from parent to null
+	// Stupid function, if node has children, they will be deleted also
+	public boolean remove(E data) {
+		boolean removed = false;
 
-		// While there are Nodes in the current depth
-		while (actualLevel.size() != 0) {
-			nextLevel = new ArrayList<Node<?>>();
-			// Iterate all Nodes of the current level which are in order
-			for (Node<?> n : actualLevel) {
-				output.add((Node<?>) n);
-				// Left then right
-				if (n.hasLeft()) {
-					nextLevel.add((Node<?>) n.getLeft());
-				}
-				if (n.hasRight()) {
-					nextLevel.add((Node<?>) n.getRight());
+		// Deleting root and hence all children
+		if (data.equals(this.root.getData())) {
+			this.root = null;
+			removed = true;
+		} else {
+			Node<E> parent = this.parent(data);
+			if (parent != null) {
+				if (parent.hasLeft() && parent.getLeft().getData().equals(data)){
+					parent.setLeft(null);
+				} else {
+					parent.setRight(null);
 				}
 			}
-			actualLevel = nextLevel;
+		}
+		return removed;
+	}
+
+	// Finding parent of node
+	public Node<E> parent(E data) {
+		Node<E> parent = null;
+		ArrayList<Node<E>> allNodes = this.BFS();
+		for (Node<E> tmp : allNodes) {
+			if (tmp.hasLeft()) {
+				if (tmp.getLeft().getData().equals(data)) {
+					parent = tmp;
+					break;
+				}
+			}
+			if (tmp.hasRight()) {
+				if (tmp.getRight().getData().equals(data)) {
+					parent = tmp;
+					break;
+				}
+			}
+		}
+		return parent;
+	}
+
+	// Breath first search
+	public ArrayList<Node<E>> BFS(){
+		return this.BFS(this.root);
+	}
+	
+	// BFS from node different than node
+	public ArrayList<Node<E>> BFS(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
+		ArrayList<Node<E>> iteratingLevel = new ArrayList<Node<E>>();
+		iteratingLevel.add((Node<E>) node);
+		ArrayList<Node<E>> nextLevel;
+
+		// While there are Nodes in the current depth
+		while (iteratingLevel.size() != 0) {
+			nextLevel = new ArrayList<Node<E>>();
+			// Iterate all Nodes of the current level which are in order
+			for (Node<E> n : iteratingLevel) {
+				output.add((Node<E>) n);
+				// Left then right
+				if (n.hasLeft()) {
+					nextLevel.add((Node<E>) n.getLeft());
+				}
+				if (n.hasRight()) {
+					nextLevel.add((Node<E>) n.getRight());
+				}
+			}
+			iteratingLevel = nextLevel;
 		}
 		return output;
 	}
 
 	// Top view from the root
-	public ArrayList<Node<?>> topView() {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+	public ArrayList<Node<E>> topView() {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
 		output.addAll(this.leftView(this.root));
 		output.addAll(this.rightView(this.root.getRight()));
 		return output;
 	}
 
-	private ArrayList<Node<?>> leftView(Node<?> node) {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+	private ArrayList<Node<E>> leftView(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
 		if (node != null) {
 			output.addAll(this.leftView(node.getLeft()));
 			output.add(node);
@@ -75,8 +125,8 @@ public class Tree<E> {
 		return output;
 	}
 
-	private ArrayList<Node<?>> rightView(Node<?> node) {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+	private ArrayList<Node<E>> rightView(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
 		if (node != null) {
 			output.add(node);
 			output.addAll(this.rightView(node.getRight()));
@@ -89,7 +139,7 @@ public class Tree<E> {
 		return this.height(this.root);
 	}
 
-	private int height(Node<?> node) {
+	private int height(Node<E> node) {
 		int height = 1;
 		if (node.hasLeft()) {
 			height += height(node.getLeft());
@@ -97,21 +147,20 @@ public class Tree<E> {
 		if (node.hasRight()) {
 			height = Math.max(height, height(node.getRight()));
 		}
-
 		return height;
 	}
 
 	// Returns the nodes of the Tree in "in Order" form
-	public ArrayList<Node<?>> inOrder() {
+	public ArrayList<Node<E>> inOrder() {
 		return inOrder(root);
 	}
 
-	private ArrayList<Node<?>> inOrder(Node<?> node) {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
-		ArrayList<Node<?>> left = new ArrayList<Node<?>>();
-		ArrayList<Node<?>> middle = new ArrayList<Node<?>>();
+	private ArrayList<Node<E>> inOrder(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
+		ArrayList<Node<E>> left = new ArrayList<Node<E>>();
+		ArrayList<Node<E>> middle = new ArrayList<Node<E>>();
 		;
-		ArrayList<Node<?>> right = new ArrayList<Node<?>>();
+		ArrayList<Node<E>> right = new ArrayList<Node<E>>();
 
 		if (node.hasLeft()) {
 			left.addAll(inOrder(node.getLeft()));
@@ -131,12 +180,12 @@ public class Tree<E> {
 	}
 
 	// Returns the nodes of the Tree in post Order form
-	public ArrayList<Node<?>> postOrder() {
+	public ArrayList<Node<E>> postOrder() {
 		return postOrder(root);
 	}
 
-	private ArrayList<Node<?>> postOrder(Node<?> node) {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+	private ArrayList<Node<E>> postOrder(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
 		if (node.hasLeft()) {
 			output.addAll(postOrder(node.getLeft()));
 		}
@@ -148,12 +197,12 @@ public class Tree<E> {
 	}
 
 	// Returns the nodes of the Tree in pre Order form
-	public ArrayList<Node<?>> preOrder() {
+	public ArrayList<Node<E>> preOrder() {
 		return preOrder(root);
 	}
 
-	private ArrayList<Node<?>> preOrder(Node<?> node) {
-		ArrayList<Node<?>> output = new ArrayList<Node<?>>();
+	private ArrayList<Node<E>> preOrder(Node<E> node) {
+		ArrayList<Node<E>> output = new ArrayList<Node<E>>();
 		output.add(node);
 		if (node.hasLeft()) {
 			output.addAll(preOrder(node.getLeft()));

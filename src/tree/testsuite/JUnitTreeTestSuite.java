@@ -12,7 +12,9 @@ import org.junit.runners.Suite;
 	TreeHeightTests.class,
 	TreeTopViewTests.class,
 	TreeBFSTests.class,
-	BinaryTreeInsertNodeTests.class
+	TreeRemoveTests.class,
+	BinaryTreeInsertNodeTests.class,
+	BinaryTreeRemoveTests.class
 })
 
 public class JUnitTreeTestSuite {
