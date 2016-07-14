@@ -3,9 +3,6 @@ package hashMap;
 public interface HashMap {
 
 	final static int DEFAULT_TABLE_SIZE = 128;
-	float threshold = 0.75f;
-	int maxSize = 96;
-	int size = 0;
 	
 	/*
 	 * Returning value from key position
@@ -21,5 +18,15 @@ public interface HashMap {
 	 * removing Entry with key 'key'
 	 */
 	public void remove(int key);
+	
+	/*
+	 * Setting the threshold
+	 */
+	public void setThreshold(float threshold);
+	
+	/*
+	 * Size of the array
+	 */
+	public int getSize();
 
 }
