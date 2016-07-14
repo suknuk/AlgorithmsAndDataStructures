@@ -6,7 +6,8 @@ import org.junit.runners.Suite;
 //JUnit Suite Test
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
-	HashMapPutGetTests.class
+	HashMapPutGetTests.class,
+	HashMapRemoveTests.class
 })
 
 public class JUnitHashMapTestSuite {

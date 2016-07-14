@@ -6,7 +6,9 @@ public class HashMap {
 
 	HashEntry[] table;
 
-	// Constructor
+	/*
+	 * Constructor
+	 */
 	public HashMap() {
 		table = new HashEntry[DEFAULT_TABLE_SIZE];
 		for (int i = 0; i < table.length; i++) {
@@ -14,14 +16,29 @@ public class HashMap {
 		}
 	}
 
-	// Returning value from key position
+	/*
+	 * Returning value from key position
+	 */
 	public String get(int key) {
 		int hash = (key % table.length);
 		if (table[hash] == null) {
 			throw new NullPointerException();
 		}
+		/*
+		 * Entry without chaining
+		 */
 		if (table[hash].getNext() == null) {
-			return table[hash].getValue();
+			/*
+			 * Checking if the entry has the same key and not just the same hash
+			 */
+			if (table[hash].getKey() == key) {
+				return table[hash].getValue();
+			} else {
+				throw new NullPointerException();
+			}
+			/*
+			 * Chained entries
+			 */
 		} else {
 			HashEntry tmp = table[hash];
 			while (tmp.getNext() != null && tmp.getKey() != key) {
@@ -35,10 +52,17 @@ public class HashMap {
 		}
 	}
 
+	/*
+	 * Putting the value with a key into the hashmap
+	 */
 	public void put(int key, String value) {
-		// Reducing hash to fit in the table
+		/*
+		 * Reducing hash to fit in the table
+		 */
 		int hash = (key % table.length);
-		System.out.println("hash : " + hash + ", key : " + key + ", value : " + value);
+		/*
+		 * No entry at the position found
+		 */
 		if (table[hash] == null) {
 			table[hash] = new HashEntry(key, value);
 		} else {
@@ -58,7 +82,57 @@ public class HashMap {
 		}
 	}
 
-	// Class to store the elements
+	/*
+	 * removing Entry with key 'key'
+	 */
+	public void remove(int key) {
+		int hash = (key % table.length);
+		if (table[hash] == null) {
+			throw new NullPointerException();
+		}
+		/*
+		 * Entry without chaining -> we can delete without worrying about the
+		 * entries with the same hash
+		 */
+		if (table[hash].getNext() == null) {
+			if (table[hash].getKey() == key) {
+				table[hash] = null;
+			} else {
+				throw new NullPointerException();
+			}
+		} else {
+			/*
+			 * case 1: entry is the first item in the chain
+			 */
+			if (table[hash].getKey() == key) {
+				table[hash] = table[hash].getNext();
+			} else {
+				HashEntry tmp = table[hash];
+				HashEntry tmpParent = null;
+				while (tmp.getNext() != null && tmp.getKey() != key) {
+					tmpParent = tmp;
+					tmp = tmp.getNext();
+				}
+				/*
+				 * case 2: end of chained list and entry with key was not found
+				 */
+				if (tmp.getNext() == null && tmp.getKey() != key) {
+					throw new NullPointerException();
+				}
+				/*
+				 * case 3: entry with key was found, hence tmp is entry with
+				 * corresponding key
+				 */
+				else if (tmp.getKey() == key) {
+					tmpParent.setNext(tmp.getNext());
+				}
+			}
+		}
+	}
+
+	/*
+	 * Class to store the entries
+	 */
 	private class HashEntry {
 
 		int key;
