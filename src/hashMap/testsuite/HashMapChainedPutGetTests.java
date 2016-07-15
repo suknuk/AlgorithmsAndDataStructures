@@ -9,11 +9,11 @@ import hashMap.HashMapChained;
 
 public class HashMapChainedPutGetTests {
 
-	HashMapChained map;
+	HashMapChained<Integer,String> map;
 
 	@Test
 	public void hashMapPutAndGetTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";
@@ -29,7 +29,7 @@ public class HashMapChainedPutGetTests {
 
 	@Test
 	public void hashMapPutAndGetSameHashTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";

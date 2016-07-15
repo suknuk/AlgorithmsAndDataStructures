@@ -10,14 +10,14 @@ import hashMap.HashMapChained;
 
 public class HashMapChainedRemoveTests {
 
-	HashMapChained map;
+	HashMapChained<Integer,String> map;
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void hashMapRemoveNoChaningTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";
@@ -33,7 +33,7 @@ public class HashMapChainedRemoveTests {
 
 	@Test
 	public void hashMapRemoveFirstEntryInChainedListTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";
@@ -53,7 +53,7 @@ public class HashMapChainedRemoveTests {
 
 	@Test
 	public void hashMapRemoveLastEntryInChainedListTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";
@@ -77,7 +77,7 @@ public class HashMapChainedRemoveTests {
 
 	@Test
 	public void hashMapRemoveMiddleEntryInChainedListTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		String e1 = "hello";
 		String e2 = "my";
 		String e3 = "dear";

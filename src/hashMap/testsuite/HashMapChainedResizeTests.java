@@ -9,11 +9,11 @@ import hashMap.HashMapChained;
 
 public class HashMapChainedResizeTests {
 
-	HashMapChained map;
+	HashMapChained<Integer,String> map;
 
 	@Test
 	public void hashMapRemoveNoChaningTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		/*
 		 * Inserting 95 entries, as the default threshold is 0.75 with 128
 		 * default array size. The table should hence resize at 96
@@ -39,7 +39,7 @@ public class HashMapChainedResizeTests {
 
 	@Test
 	public void hashMapRemoveChainedEntriesTest() {
-		map = new HashMapChained();
+		map = new HashMapChained<Integer,String>();
 		/*
 		 * Inserting 95 entries, all with the same hash. The calculation of
 		 * i*map.getMapSize() will always give the hash of 0, hence all entries

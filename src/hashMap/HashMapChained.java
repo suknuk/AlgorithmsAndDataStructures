@@ -1,23 +1,24 @@
 package hashMap;
 
-public class HashMapChained implements HashMap {
+public class HashMapChained<K, V> implements HashMap<K, V> {
 
-	HashEntry[] map;
+	HashEntry<K, V>[] map;
 
 	private float threshold = 0.75f;
 	/*
 	 * Is 96 if DEFAULT_TABLE_SIZE is 128
 	 */
-	private int maxSize = (int)(HashMap.DEFAULT_TABLE_SIZE * this.threshold);
+	private int maxSize = (int) (HashMap.DEFAULT_TABLE_SIZE * this.threshold);
 	private int size = 0;
 
 	/*
 	 * Constructor
 	 */
+	@SuppressWarnings("unchecked")
 	public HashMapChained() {
 		this.map = new HashEntry[DEFAULT_TABLE_SIZE];
 	}
-	
+
 	public HashMapChained(float threshold) {
 		this();
 		this.threshold = threshold;
@@ -30,8 +31,16 @@ public class HashMapChained implements HashMap {
 		this.threshold = threshold;
 	}
 
+	/*
+	 * Calculating a hash key
+	 */
+	public int hash(K key) {
+		return Math.abs(key.hashCode() % this.map.length);
+	}
+
+	@SuppressWarnings("unchecked")
 	private void resize() {
-		HashEntry[] oldMap = this.map;
+		HashEntry<K, V>[] oldMap = this.map;
 		/*
 		 * New map has 2 x the size
 		 */
@@ -45,7 +54,7 @@ public class HashMapChained implements HashMap {
 		 */
 		for (int i = 0; i < oldMap.length; i++) {
 			if (oldMap[i] != null) {
-				HashEntry tmp = oldMap[i];
+				HashEntry<K, V> tmp = oldMap[i];
 				while (tmp != null) {
 					this.put(tmp.getKey(), tmp.getValue());
 					tmp = tmp.getNext();
@@ -57,32 +66,20 @@ public class HashMapChained implements HashMap {
 	/*
 	 * Returning value from key position
 	 */
-	public String get(int key) {
-		int hash = (key % this.map.length);
+	public V get(K key) {
+		int hash = this.hash(key);
 		if (this.map[hash] == null) {
 			throw new NullPointerException();
 		}
 		/*
-		 * Entry without chaining
+		 * Iterating over chained list until we find or not find the Entry
 		 */
-		if (this.map[hash].getNext() == null) {
-			/*
-			 * Checking if the entry has the same key and not just the same hash
-			 */
-			if (this.map[hash].getKey() == key) {
-				return this.map[hash].getValue();
-			} else {
-				throw new NullPointerException();
-			}
-			/*
-			 * Chained entries
-			 */
-		} else {
-			HashEntry tmp = this.map[hash];
-			while (tmp.getNext() != null && tmp.getKey() != key) {
+		else {
+			HashEntry<K, V> tmp = this.map[hash];
+			while (tmp.getNext() != null && (tmp.getKey().equals(key) == false)) {
 				tmp = tmp.getNext();
 			}
-			if (tmp.getKey() == key) {
+			if (tmp.getKey().equals(key)) {
 				return tmp.getValue();
 			} else {
 				throw new NullPointerException();
@@ -93,30 +90,30 @@ public class HashMapChained implements HashMap {
 	/*
 	 * Putting the value with a key into the hashmap
 	 */
-	public void put(int key, String value) {
+	public void put(K key, V value) {
 		/*
 		 * Reducing hash to fit in the table
 		 */
-		int hash = (key % this.map.length);
+		int hash = this.hash(key);
 		/*
 		 * No entry at the position found
 		 */
 		if (this.map[hash] == null) {
-			this.map[hash] = new HashEntry(key, value);
+			this.map[hash] = new HashEntry<K, V>(key, value);
 			this.size++;
 		} else {
 			/*
 			 * Entry already exists in this position, we hence seek the end of
 			 * the list
 			 */
-			HashEntry tmp = this.map[hash];
+			HashEntry<K, V> tmp = this.map[hash];
 			while (tmp.getNext() != null) {
 				tmp = tmp.getNext();
 			}
-			if (tmp.getKey() == key) {
+			if (tmp.getKey().equals(key)) {
 				tmp.setValue(value);
 			} else {
-				tmp.setNext(new HashEntry(key, value));
+				tmp.setNext(new HashEntry<K, V>(key, value));
 				this.size++;
 			}
 		}
@@ -128,8 +125,8 @@ public class HashMapChained implements HashMap {
 	/*
 	 * removing Entry with key 'key'
 	 */
-	public void remove(int key) {
-		int hash = (key % this.map.length);
+	public void remove(K key) {
+		int hash = this.hash(key);
 		if (this.map[hash] == null) {
 			throw new NullPointerException();
 		}
@@ -138,7 +135,7 @@ public class HashMapChained implements HashMap {
 		 * entries with the same hash
 		 */
 		if (this.map[hash].getNext() == null) {
-			if (this.map[hash].getKey() == key) {
+			if (this.map[hash].getKey().equals(key)) {
 				this.map[hash] = null;
 				this.size--;
 			} else {
@@ -148,26 +145,26 @@ public class HashMapChained implements HashMap {
 			/*
 			 * case 1: entry is the first item in the chain
 			 */
-			if (this.map[hash].getKey() == key) {
+			if (this.map[hash].getKey().equals(key)) {
 				this.map[hash] = this.map[hash].getNext();
 			} else {
-				HashEntry tmp = this.map[hash];
-				HashEntry tmpParent = null;
-				while (tmp.getNext() != null && tmp.getKey() != key) {
+				HashEntry<K, V> tmp = this.map[hash];
+				HashEntry<K, V> tmpParent = null;
+				while (tmp.getNext() != null && (tmp.getKey().equals(key) == false)) {
 					tmpParent = tmp;
 					tmp = tmp.getNext();
 				}
 				/*
 				 * case 2: end of chained list and entry with key was not found
 				 */
-				if (tmp.getNext() == null && tmp.getKey() != key) {
+				if (tmp.getNext() == null && (tmp.getKey().equals(key) == false)) {
 					throw new NullPointerException();
 				}
 				/*
 				 * case 3: entry with key was found, hence tmp is entry with
 				 * corresponding key
 				 */
-				else if (tmp.getKey() == key) {
+				else if (tmp.getKey().equals(key)) {
 					tmpParent.setNext(tmp.getNext());
 				}
 				this.size--;
@@ -186,34 +183,34 @@ public class HashMapChained implements HashMap {
 	/*
 	 * Class to store the entries
 	 */
-	private class HashEntry {
+	static class HashEntry<K, V> {
 
-		int key;
-		String value;
-		HashEntry next;
+		K key;
+		V value;
+		HashEntry<K, V> next;
 
-		HashEntry(int key, String value) {
+		HashEntry(K key, V value) {
 			this.key = key;
 			this.value = value;
 		}
 
-		int getKey() {
+		K getKey() {
 			return this.key;
 		}
 
-		void setValue(String value) {
+		void setValue(V value) {
 			this.value = value;
 		}
 
-		String getValue() {
+		V getValue() {
 			return this.value;
 		}
 
-		void setNext(HashEntry next) {
+		void setNext(HashEntry<K, V> next) {
 			this.next = next;
 		}
 
-		HashEntry getNext() {
+		HashEntry<K, V> getNext() {
 			return this.next;
 		}
 	}

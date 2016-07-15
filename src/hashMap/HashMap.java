@@ -1,23 +1,23 @@
 package hashMap;
 
-public interface HashMap {
+public interface HashMap<K,V> {
 
 	final static int DEFAULT_TABLE_SIZE = 128;
 	
 	/*
 	 * Returning value from key position
 	 */
-	public String get(int key);
+	public V get(K key);
 
 	/*
 	 * Putting the value with a key into the hashmap
 	 */
-	public void put(int key, String value);
+	public void put(K key, V value);
 
 	/*
 	 * removing Entry with key 'key'
 	 */
-	public void remove(int key);
+	public void remove(K key);
 	
 	/*
 	 * Setting the threshold
